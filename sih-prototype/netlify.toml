@@ -1,12 +1,19 @@
-# This is the main build configuration
 [build]
-  # This tells Netlify your site files (index.html) are in this folder
-  publish = "sih-prototype/"
-  # This tells Netlify where your serverless functions are
-  functions = "sih-prototype/netlify/functions/"
+  # Change this to your actual build directory
+  publish = "."
+  # Or if you have a build process:
+  # publish = "dist"
+  
+  # Point to the correct functions directory
+  functions = "netlify/functions/"
 
-# This rule makes calls to /api/* run your functions
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
+  status = 200
+
+# Add this to handle SPA routing (if using client-side routing)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
