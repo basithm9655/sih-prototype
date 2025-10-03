@@ -1,9 +1,13 @@
-[build]
-  # Assuming index.html is in the root directory. 
-  # If it's in a folder like "public" or "dist", change this.
-  publish = "." 
-  functions = "netlify/functions"
+# This file should be at the ROOT of your repository.
 
+[build]
+  # This tells Netlify that your website's main page is in the 'sih-prototype' folder.
+  publish = "sih-prototype"
+  
+  # This tells Netlify where your serverless functions are located.
+  functions = "sih-prototype/netlify/functions"
+
+# This rule makes your function available at the clean URL: /api/gemini
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
