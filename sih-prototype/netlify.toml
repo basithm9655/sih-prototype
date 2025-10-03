@@ -1,19 +1,7 @@
-[build]
-  # Change this to your actual build directory
-  publish = "sih-prototype"
-  # Or if you have a build process:
-  # publish = "dist"
-  
-  # Point to the correct functions directory
-  functions = "netlify/functions/"
+[functions]
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
-  status = 200
-
-# Add this to handle SPA routing (if using client-side routing)
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
   status = 200
