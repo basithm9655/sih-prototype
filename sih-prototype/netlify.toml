@@ -1,14 +1,10 @@
 [build]
-  publish = "."
+  # Assuming index.html is in the root directory. 
+  # If it's in a folder like "public" or "dist", change this.
+  publish = "." 
   functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
-  status = 200
-
-# Add this for SPA routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
   status = 200
