@@ -568,6 +568,38 @@
                 });
             });
         });
+        async function callGeminiAPI(prompt, type = "general") {
+  try {
+    const response = await fetch('/api/gemini', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        prompt: prompt,
+        type: type
+      })
+    });
+    
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('Error calling Gemini API:', error);
+    return { error: 'Failed to get response' };
+  }
+}
+
+// Example usage in your AI Career Counselor section
+document.querySelector('.fa-paper-plane').parentElement.addEventListener('click', async function() {
+  const input = document.querySelector('input[type="text"]');
+  const message = input.value.trim();
+  
+  if (message) {
+    const response = await callGeminiAPI(message, "career_advice");
+    // Handle the response - add to chat UI
+    console.log(response);
+  }
+});
     </script>
 </body>
 </html>
