@@ -1,3 +1,4 @@
+// netlify/functions/gemini.js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async (event, context) => {
@@ -17,29 +18,24 @@ exports.handler = async (event, context) => {
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json",
-      },
+      headers: { "Access-Control-Allow-Origin": "*" },
       body: JSON.stringify({ error: "Method not allowed" }),
     };
   }
 
   try {
-    // FIXED: Correct environment variable name
-    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+    // 1. Securely get the API key from environment variables
+    const { GEMINI_API_KEY } = process.env;
     
     if (!GEMINI_API_KEY) {
       return {
         statusCode: 500,
-        headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-        },
+        headers: { "Access-Control-Allow-Origin": "*" },
         body: JSON.stringify({ error: "API key not configured" }),
       };
     }
 
+    // 2. Use the environment variable to initialize GoogleGenerativeAI
     const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
