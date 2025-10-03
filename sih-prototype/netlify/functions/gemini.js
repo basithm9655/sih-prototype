@@ -27,9 +27,9 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { GEMINI_API_KEY } = process.env;
+    const { AIzaSyA7xSWDwZh6gDbk8ixc5GlKdm5CnIWZ01k } = process.env;
     
-    if (!GEMINI_API_KEY) {
+    if (!AIzaSyA7xSWDwZh6gDbk8ixc5GlKdm5CnIWZ01k) {
       return {
         statusCode: 500,
         headers: {
@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+    const genAI = new GoogleGenerativeAI(AIzaSyA7xSWDwZh6gDbk8ixc5GlKdm5CnIWZ01k);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const requestBody = JSON.parse(event.body);
