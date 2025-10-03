@@ -1,4 +1,3 @@
-// netlify/functions/gemini.js
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
 exports.handler = async (event, context) => {
@@ -27,9 +26,10 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    const { AIzaSyA7xSWDwZh6gDbk8ixc5GlKdm5CnIWZ01k } = process.env;
+    // FIXED: Correct environment variable name
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     
-    if (!AIzaSyA7xSWDwZh6gDbk8ixc5GlKdm5CnIWZ01k) {
+    if (!GEMINI_API_KEY) {
       return {
         statusCode: 500,
         headers: {
@@ -40,7 +40,7 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const genAI = new GoogleGenerativeAI(AIzaSyA7xSWDwZh6gDbk8ixc5GlKdm5CnIWZ01k);
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
     const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
     const requestBody = JSON.parse(event.body);
