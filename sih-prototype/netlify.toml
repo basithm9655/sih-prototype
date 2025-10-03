@@ -1,6 +1,6 @@
 [build]
   # Change this to your actual build directory
-  publish = "."
+  publish = "sih-prototype"
   # Or if you have a build process:
   # publish = "dist"
   
